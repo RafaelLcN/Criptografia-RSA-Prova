@@ -10,8 +10,8 @@ import json
 from datetime import datetime
 
 app = Flask(__name__)
-PEER_NAME = "Chat 2"  # Alterado para Chat 2
-PEER_URL = "http://localhost:5000"  # Alterado para a porta do Chat 1
+PEER_NAME = "Chat 2" 
+PEER_URL = "http://localhost:5000" 
 MONITOR_LOG = 'rsa_monitor.log'
 
 # Configurações (mantidas iguais)
@@ -52,7 +52,7 @@ def webhook():
             if sha256(msg) == signature:
                 message_queue.append(msg)
                 log_event('MESSAGE_RECEIVED', {
-                    'from': 'Chat 1',  # Alterado para Chat 1
+                    'from': 'Chat 1',
                     'encrypted': str(data['message'])[:20] + '...',
                     'decrypted': msg,
                     'signature': signature[:16] + '...'
@@ -90,7 +90,7 @@ def send_message(message):
         signature = sha256(message)
         encrypted = rsa_encrypt(message + signature, peer_public_key)
         log_event('MESSAGE_SENT', {
-            'to': 'Chat 1',  # Alterado para Chat 1
+            'to': 'Chat 1', 
             'encrypted': str(encrypted)[:20] + '...',
             'decrypted': message,
             'signature': signature[:16] + '...'
@@ -106,7 +106,7 @@ def message_receiver():
     while not stop_threads:
         if message_queue:
             msg = message_queue.pop(0)
-            sys.stdout.write(f"\r[Chat 1] >>> {msg}\n[{PEER_NAME}] >>> ")  # Alterado para Chat 1
+            sys.stdout.write(f"\r[Chat 1] >>> {msg}\n[{PEER_NAME}] >>> ") 
             sys.stdout.flush()
         time.sleep(0.1)
 
