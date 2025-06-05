@@ -14,14 +14,14 @@ PEER_NAME = "Chat 2"
 PEER_URL = "http://localhost:5000" 
 MONITOR_LOG = 'rsa_monitor.log'
 
-# Configurações (mantidas iguais)
+# Configurações
 public_key, private_key = generate_rsa_keys(1024)
 peer_public_key = None
 message_queue = []
 connection_established = False
 stop_threads = False
 
-# Configuração do logging para o monitor (mantida igual)
+# Configuração do logging para o monitor
 monitor_logger = logging.getLogger('rsa_monitor')
 monitor_logger.setLevel(logging.INFO)
 file_handler = logging.FileHandler(MONITOR_LOG)
@@ -29,7 +29,7 @@ file_handler.setFormatter(logging.Formatter('%(message)s'))
 monitor_logger.addHandler(file_handler)
 monitor_logger.propagate = False
 
-# Desativa logs do Flask (mantido igual)
+# Desativa logs do Flask
 logging.getLogger('werkzeug').disabled = True
 
 def log_event(event_type, data):
@@ -130,7 +130,7 @@ def establish_connection():
 def start_chat():
     global stop_threads
     
-    # Inicia threads (mantido igual)
+    # Inicia threads
     threading.Thread(target=message_receiver, daemon=True).start()
     threading.Thread(target=establish_connection, daemon=True).start()
     
